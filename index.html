@@ -6,25 +6,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>نموذج الطلب</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .slider::-webkit-scrollbar {
+      display: none;
+    }
+    .slide {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: 150px;
+      text-align: center;
+      margin-left: 1rem;
+    }
+  </style>
 </head>
 <body class="bg-purple-100 text-right p-4">
   <!-- Logo -->
   <div class="flex justify-center mb-4">
-    <img src="logo.png" alt="الشعار" class="h-16">
+    <img src="logo.png" alt="الشعار" class="h-24">
   </div>
 
-  <!-- Product Selection -->
-  <div class="grid grid-cols-1 gap-4 mb-6">
-    <div class="text-center">
-      <img src="product1.jpg" alt="منتج 1" class="mx-auto h-32">
+  <!-- Product Selection Slider -->
+  <div class="slider mb-6">
+    <div class="slide">
+      <img src="product1.jpg" alt="منتج 1" class="mx-auto h-24">
       <button onclick="selectProduct('منتج 1')" class="bg-purple-600 text-white py-1 px-4 rounded mt-2">اختيار</button>
     </div>
-    <div class="text-center">
-      <img src="product2.jpg" alt="منتج 2" class="mx-auto h-32">
+    <div class="slide">
+      <img src="product2.jpg" alt="منتج 2" class="mx-auto h-24">
       <button onclick="selectProduct('منتج 2')" class="bg-purple-600 text-white py-1 px-4 rounded mt-2">اختيار</button>
     </div>
-    <div class="text-center">
-      <img src="product3.jpg" alt="منتج 3" class="mx-auto h-32">
+    <div class="slide">
+      <img src="product3.jpg" alt="منتج 3" class="mx-auto h-24">
       <button onclick="selectProduct('منتج 3')" class="bg-purple-600 text-white py-1 px-4 rounded mt-2">اختيار</button>
     </div>
   </div>
@@ -60,7 +78,6 @@
       <option value="تلمسان">تلمسان</option>
       <option value="تيارت">تيارت</option>
       <option value="تيزي وزو">تيزي وزو</option>
-      <option value="الجزائر">الجزائر</option>
       <option value="الجلفة">الجلفة</option>
       <option value="جيجل">جيجل</option>
       <option value="سطيف">سطيف</option>
