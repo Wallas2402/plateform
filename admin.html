@@ -1,1 +1,82 @@
+<!-- admin.html (Admin Panel in English) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Admin Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+  <h1 class="text-2xl font-bold mb-4">Orders</h1>
+
+  <table id="orderTable" class="min-w-full bg-white shadow rounded overflow-hidden">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="px-4 py-2">Name</th>
+        <th class="px-4 py-2">Surname</th>
+        <th class="px-4 py-2">Phone</th>
+        <th class="px-4 py-2">Wilaya</th>
+        <th class="px-4 py-2">Address</th>
+        <th class="px-4 py-2">Quantity</th>
+        <th class="px-4 py-2">Product</th>
+        <th class="px-4 py-2">Status</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <!-- Orders will be loaded here -->
+    </tbody>
+  </table>
+
+  <div class="mt-4">
+    <button onclick="exportToExcel()" class="bg-blue-600 text-white py-2 px-4 rounded">Export to Excel</button>
+  </div>
+
+  <script>
+    // Dummy orders
+    const orders = [
+      { name: 'Ali', surname: 'Ahmed', phone: '0555123456', wilaya: 'الجزائر', address: 'شارع 123', quantity: '2', product: 'منتج 1', status: 'Pending' }
+    ];
+
+    const tableBody = document.getElementById('tableBody');
+    orders.forEach((order, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="border px-4 py-2">${order.name}</td>
+        <td class="border px-4 py-2">${order.surname}</td>
+        <td class="border px-4 py-2">${order.phone}</td>
+        <td class="border px-4 py-2">${order.wilaya}</td>
+        <td class="border px-4 py-2">${order.address}</td>
+        <td class="border px-4 py-2">${order.quantity}</td>
+        <td class="border px-4 py-2">${order.product}</td>
+        <td class="border px-4 py-2">
+          <select>
+            <option ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+            <option ${order.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+            <option ${order.status === 'Canceled' ? 'selected' : ''}>Canceled</option>
+          </select>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+
+    function exportToExcel() {
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "Name,Surname,Phone,Wilaya,Address,Quantity,Product,Status\n";
+      document.querySelectorAll('#orderTable tbody tr').forEach(row => {
+        const cols = row.querySelectorAll('td');
+        const values = Array.from(cols).map((col, i) => i === 7 ? col.querySelector('select').value : col.textContent);
+        csvContent += values.join(",") + "\n";
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "orders.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
 
