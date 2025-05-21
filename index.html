@@ -2,128 +2,171 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>نموذج الطلب</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
     body {
-      background: linear-gradient(to bottom, #6b21a8, #4c1d95);
+      background: linear-gradient(to bottom, #4b0082, #6a0dad); /* Violet */
     }
     .highlight {
-      background-color: #1f2937 !important; /* Dark gray */
+      background-color: #1f2937 !important; /* Gris foncé pour produit sélectionné */
       color: white !important;
-      border: 2px solid black;
     }
-    .product-button {
-      transition: transform 0.2s;
+    .custom-border {
       border: 2px solid black;
-    }
-    input, select {
-      border: 2px solid black !important;
     }
   </style>
 </head>
 <body class="text-right p-4">
 
   <!-- Logo -->
-  <div class="flex justify-center mb-4 bg-white rounded shadow p-4">
-    <img src="logo.png" alt="الشعار" class="h-20 object-contain">
+  <div class="flex justify-center mb-4 bg-white rounded shadow p-2">
+    <img src="logo.png" alt="الشعار" class="h-24 w-auto"> <!-- Rectangulaire + plus petit -->
   </div>
 
-  <!-- Products scroll -->
-  <div class="overflow-x-auto whitespace-nowrap mb-6 bg-white rounded shadow p-4">
+  <!-- Product Carousel -->
+  <div class="overflow-x-auto whitespace-nowrap mb-6 bg-white p-4 rounded shadow">
     <div class="inline-block text-center mx-2">
-      <img src="product1.jpg" alt="منتج 1" class="mx-auto h-48">
-      <button onclick="selectProduct(this, 'منتج 1')" class="product-button bg-purple-600 text-white py-1 px-4 rounded mt-2 hover:scale-105">اختيار</button>
+      <img src="product1.jpg" alt="منتج 1" class="mx-auto h-48 w-auto">
+      <button onclick="selectProduct(this, 'منتج 1')" class="product-button bg-purple-600 text-white py-1 px-4 mt-2 rounded custom-border">اختيار</button>
     </div>
     <div class="inline-block text-center mx-2">
-      <img src="product2.jpg" alt="منتج 2" class="mx-auto h-48">
-      <button onclick="selectProduct(this, 'منتج 2')" class="product-button bg-purple-600 text-white py-1 px-4 rounded mt-2 hover:scale-105">اختيار</button>
+      <img src="product2.jpg" alt="منتج 2" class="mx-auto h-48 w-auto">
+      <button onclick="selectProduct(this, 'منتج 2')" class="product-button bg-purple-600 text-white py-1 px-4 mt-2 rounded custom-border">اختيار</button>
     </div>
     <div class="inline-block text-center mx-2">
-      <img src="product3.jpg" alt="منتج 3" class="mx-auto h-48">
-      <button onclick="selectProduct(this, 'منتج 3')" class="product-button bg-purple-600 text-white py-1 px-4 rounded mt-2 hover:scale-105">اختيار</button>
+      <img src="product3.jpg" alt="منتج 3" class="mx-auto h-48 w-auto">
+      <button onclick="selectProduct(this, 'منتج 3')" class="product-button bg-purple-600 text-white py-1 px-4 mt-2 rounded custom-border">اختيار</button>
     </div>
   </div>
 
   <!-- Form -->
-  <form onsubmit="return handleSubmit()" action="https://formspree.io/f/mpwdkapw" method="POST" class="bg-white p-4 rounded shadow space-y-4">
+  <form onsubmit="return handleSubmit()" method="POST" action="https://formspree.io/f/mpwdkapw" class="bg-white p-4 rounded shadow space-y-4">
+
     <input type="hidden" name="product" id="productInput">
 
     <div>
       <label class="block mb-1">الاسم</label>
-      <input name="first_name" type="text" class="w-full p-2 rounded" required>
+      <input name="first_name" type="text" class="w-full p-2 rounded custom-border" required />
     </div>
 
     <div>
       <label class="block mb-1">اللقب</label>
-      <input name="last_name" type="text" class="w-full p-2 rounded" required>
+      <input name="last_name" type="text" class="w-full p-2 rounded custom-border" required />
     </div>
 
     <div>
       <label class="block mb-1">رقم الهاتف</label>
-      <input name="phone" type="tel" class="w-full p-2 rounded" required>
+      <input name="phone" type="tel" class="w-full p-2 rounded custom-border" required />
     </div>
 
     <div>
       <label class="block mb-1">الولاية</label>
-      <select name="wilaya" class="w-full p-2 rounded" required>
+      <select name="wilaya" class="w-full p-2 rounded custom-border" required>
         <option value="الجزائر">الجزائر</option>
-        <!-- Ajoute ici les 57 autres wilayas -->
-        <option value="وهران">وهران</option>
-        <option value="قسنطينة">قسنطينة</option>
-        <option value="سطيف">سطيف</option>
+        <option value="أدرار">أدرار</option>
+        <option value="الشلف">الشلف</option>
+        <option value="الأغواط">الأغواط</option>
+        <option value="أم البواقي">أم البواقي</option>
         <option value="باتنة">باتنة</option>
         <option value="بجاية">بجاية</option>
+        <option value="بسكرة">بسكرة</option>
+        <option value="بشار">بشار</option>
+        <option value="البليدة">البليدة</option>
+        <option value="البويرة">البويرة</option>
+        <option value="تمنراست">تمنراست</option>
+        <option value="تبسة">تبسة</option>
+        <option value="تلمسان">تلمسان</option>
+        <option value="تيارت">تيارت</option>
         <option value="تيزي وزو">تيزي وزو</option>
-        <!-- ... (à compléter si nécessaire) -->
+        <option value="الجزائر">الجزائر</option>
+        <option value="الجلفة">الجلفة</option>
+        <option value="جيجل">جيجل</option>
+        <option value="سطيف">سطيف</option>
+        <option value="سعيدة">سعيدة</option>
+        <option value="سكيكدة">سكيكدة</option>
+        <option value="سيدي بلعباس">سيدي بلعباس</option>
+        <option value="عنابة">عنابة</option>
+        <option value="قالمة">قالمة</option>
+        <option value="قسنطينة">قسنطينة</option>
+        <option value="المدية">المدية</option>
+        <option value="مستغانم">مستغانم</option>
+        <option value="المسيلة">المسيلة</option>
+        <option value="معسكر">معسكر</option>
+        <option value="ورقلة">ورقلة</option>
+        <option value="وهران">وهران</option>
+        <option value="البيض">البيض</option>
+        <option value="إليزي">إليزي</option>
+        <option value="برج بوعريريج">برج بوعريريج</option>
+        <option value="بومرداس">بومرداس</option>
+        <option value="الطارف">الطارف</option>
+        <option value="تندوف">تندوف</option>
+        <option value="تيسمسيلت">تيسمسيلت</option>
+        <option value="الوادي">الوادي</option>
+        <option value="خنشلة">خنشلة</option>
+        <option value="سوق أهراس">سوق أهراس</option>
+        <option value="تيبازة">تيبازة</option>
+        <option value="ميلة">ميلة</option>
+        <option value="عين الدفلى">عين الدفلى</option>
+        <option value="النعامة">النعامة</option>
+        <option value="عين تموشنت">عين تموشنت</option>
+        <option value="غرداية">غرداية</option>
+        <option value="غليزان">غليزان</option>
+        <option value="تميمون">تميمون</option>
+        <option value="أولاد جلال">أولاد جلال</option>
+        <option value="عين صالح">عين صالح</option>
+        <option value="عين قزام">عين قزام</option>
+        <option value="تقرت">تقرت</option>
+        <option value="جانت">جانت</option>
+        <option value="المغير">المغير</option>
+        <option value="المنيعة">المنيعة</option>
       </select>
     </div>
 
     <div>
       <label class="block mb-1">العنوان</label>
-      <input name="address" type="text" class="w-full p-2 rounded" required>
+      <input name="address" type="text" class="w-full p-2 rounded custom-border" required />
     </div>
 
     <div>
       <label class="block mb-1">الكمية</label>
-      <input name="quantity" type="number" min="1" class="w-full p-2 rounded" required>
+      <input name="quantity" type="number" min="1" class="w-full p-2 rounded custom-border" required />
     </div>
 
-    <button type="submit" class="bg-green-600 text-white py-2 px-6 rounded border-black border-2">إرسال الطلب</button>
+    <button type="submit" class="bg-green-600 text-white py-2 px-6 rounded custom-border w-full">إرسال الطلب</button>
   </form>
 
   <script>
-    let selectedProduct = "";
-
     function selectProduct(button, productName) {
-      selectedProduct = productName;
       document.getElementById('productInput').value = productName;
-
       document.querySelectorAll('.product-button').forEach(btn => btn.classList.remove('highlight'));
       button.classList.add('highlight');
     }
 
     function handleSubmit() {
-      if (!selectedProduct) {
+      const product = document.getElementById('productInput').value;
+      if (!product) {
         alert("يرجى اختيار منتج قبل إرسال الطلب");
         return false;
       }
 
-      // Stocker dans localStorage
-      const order = {
-        first_name: document.querySelector('[name="first_name"]').value,
-        last_name: document.querySelector('[name="last_name"]').value,
-        phone: document.querySelector('[name="phone"]').value,
-        wilaya: document.querySelector('[name="wilaya"]').value,
-        address: document.querySelector('[name="address"]').value,
-        quantity: document.querySelector('[name="quantity"]').value,
-        product: selectedProduct,
-        status: "Pending"
+      // Collect form data
+      const form = document.querySelector("form");
+      const data = {
+        product: form.product.value,
+        first_name: form.first_name.value,
+        last_name: form.last_name.value,
+        phone: form.phone.value,
+        wilaya: form.wilaya.value,
+        address: form.address.value,
+        quantity: form.quantity.value,
+        status: "pending"
       };
 
-      let orders = JSON.parse(localStorage.getItem("orders") || "[]");
-      orders.push(order);
+      // Save to localStorage
+      const orders = JSON.parse(localStorage.getItem("orders")) || [];
+      orders.push(data);
       localStorage.setItem("orders", JSON.stringify(orders));
 
       return true; // continue to submit to Formspree
