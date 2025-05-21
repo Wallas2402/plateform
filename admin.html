@@ -1,82 +1,150 @@
-<!-- admin.html (Admin Panel in English) -->
+<!-- index.html (Client Page in Arabic) -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Admin Panel</title>
+  <title>نموذج الطلب</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .slider {
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: scroll 15s linear infinite;
+    }
+    .slide {
+      display: inline-block;
+      width: 100px;
+      margin: 0 1rem;
+      text-align: center;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 p-4">
-  <h1 class="text-2xl font-bold mb-4">Orders</h1>
-
-  <table id="orderTable" class="min-w-full bg-white shadow rounded overflow-hidden">
-    <thead class="bg-gray-200">
-      <tr>
-        <th class="px-4 py-2">Name</th>
-        <th class="px-4 py-2">Surname</th>
-        <th class="px-4 py-2">Phone</th>
-        <th class="px-4 py-2">Wilaya</th>
-        <th class="px-4 py-2">Address</th>
-        <th class="px-4 py-2">Quantity</th>
-        <th class="px-4 py-2">Product</th>
-        <th class="px-4 py-2">Status</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody">
-      <!-- Orders will be loaded here -->
-    </tbody>
-  </table>
-
-  <div class="mt-4">
-    <button onclick="exportToExcel()" class="bg-blue-600 text-white py-2 px-4 rounded">Export to Excel</button>
+<body class="bg-purple-100 text-right p-4">
+  <!-- Logo -->
+  <div class="flex justify-center mb-4">
+    <img src="logo.png" alt="الشعار" class="h-48">
   </div>
 
+  <!-- Product Selection Slider -->
+  <div class="slider mb-6">
+    <div class="slide">
+      <img src="product1.jpg" alt="منتج 1" class="mx-auto h-16">
+      <button onclick="selectProduct('منتج 1')" class="bg-purple-600 text-white py-1 px-4 rounded mt-2">اختيار</button>
+    </div>
+    <div class="slide">
+      <img src="product2.jpg" alt="منتج 2" class="mx-auto h-16">
+      <button onclick="selectProduct('منتج 2')" class="bg-purple-600 text-white py-1 px-4 rounded mt-2">اختيار</button>
+    </div>
+    <div class="slide">
+      <img src="product3.jpg" alt="منتج 3" class="mx-auto h-16">
+      <button onclick="selectProduct('منتج 3')" class="bg-purple-600 text-white py-1 px-4 rounded mt-2">اختيار</button>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <form onsubmit="return validateProduct()" action="https://formspree.io/f/mpwdkapw" method="POST" class="bg-white p-4 rounded shadow">
+    <input type="hidden" name="product" id="productInput">
+
+    <label class="block mb-2">الاسم</label>
+    <input name="first_name" type="text" class="w-full mb-4 p-2 border rounded" required>
+
+    <label class="block mb-2">اللقب</label>
+    <input name="last_name" type="text" class="w-full mb-4 p-2 border rounded" required>
+
+    <label class="block mb-2">رقم الهاتف</label>
+    <input name="phone" type="tel" class="w-full mb-4 p-2 border rounded" required>
+
+    <label class="block mb-2">الولاية</label>
+    <select name="wilaya" class="w-full mb-4 p-2 border rounded" required>
+      <option value="الجزائر">الجزائر</option>
+      <option value="أدرار">أدرار</option>
+      <option value="الشلف">الشلف</option>
+      <option value="الأغواط">الأغواط</option>
+      <option value="أم البواقي">أم البواقي</option>
+      <option value="باتنة">باتنة</option>
+      <option value="بجاية">بجاية</option>
+      <option value="بسكرة">بسكرة</option>
+      <option value="بشار">بشار</option>
+      <option value="البليدة">البليدة</option>
+      <option value="البويرة">البويرة</option>
+      <option value="تمنراست">تمنراست</option>
+      <option value="تبسة">تبسة</option>
+      <option value="تلمسان">تلمسان</option>
+      <option value="تيارت">تيارت</option>
+      <option value="تيزي وزو">تيزي وزو</option>
+      <option value="الجزائر">الجزائر</option>
+      <option value="الجلفة">الجلفة</option>
+      <option value="جيجل">جيجل</option>
+      <option value="سطيف">سطيف</option>
+      <option value="سعيدة">سعيدة</option>
+      <option value="سكيكدة">سكيكدة</option>
+      <option value="سيدي بلعباس">سيدي بلعباس</option>
+      <option value="عنابة">عنابة</option>
+      <option value="قالمة">قالمة</option>
+      <option value="قسنطينة">قسنطينة</option>
+      <option value="المدية">المدية</option>
+      <option value="مستغانم">مستغانم</option>
+      <option value="المسيلة">المسيلة</option>
+      <option value="معسكر">معسكر</option>
+      <option value="ورقلة">ورقلة</option>
+      <option value="وهران">وهران</option>
+      <option value="البيض">البيض</option>
+      <option value="إليزي">إليزي</option>
+      <option value="برج بوعريريج">برج بوعريريج</option>
+      <option value="بومرداس">بومرداس</option>
+      <option value="الطارف">الطارف</option>
+      <option value="تندوف">تندوف</option>
+      <option value="تيسمسيلت">تيسمسيلت</option>
+      <option value="الوادي">الوادي</option>
+      <option value="خنشلة">خنشلة</option>
+      <option value="سوق أهراس">سوق أهراس</option>
+      <option value="تيبازة">تيبازة</option>
+      <option value="ميلة">ميلة</option>
+      <option value="عين الدفلى">عين الدفلى</option>
+      <option value="النعامة">النعامة</option>
+      <option value="عين تموشنت">عين تموشنت</option>
+      <option value="غرداية">غرداية</option>
+      <option value="غليزان">غليزان</option>
+      <option value="تيميمون">تيميمون</option>
+      <option value="برج باجي مختار">برج باجي مختار</option>
+      <option value="أولاد جلال">أولاد جلال</option>
+      <option value="بني عباس">بني عباس</option>
+      <option value="إن صالح">إن صالح</option>
+      <option value="إن قزام">إن قزام</option>
+      <option value="تقرت">تقرت</option>
+      <option value="جانت">جانت</option>
+      <option value="المغير">المغير</option>
+      <option value="المنيعة">المنيعة</option>
+    </select>
+
+    <label class="block mb-2">العنوان</label>
+    <input name="address" type="text" class="w-full mb-4 p-2 border rounded" required>
+
+    <label class="block mb-2">الكمية</label>
+    <input name="quantity" type="number" min="1" class="w-full mb-4 p-2 border rounded" required>
+
+    <button type="submit" class="bg-green-600 text-white py-2 px-6 rounded">إرسال الطلب</button>
+  </form>
+
   <script>
-    // Dummy orders
-    const orders = [
-      { name: 'Ali', surname: 'Ahmed', phone: '0555123456', wilaya: 'الجزائر', address: 'شارع 123', quantity: '2', product: 'منتج 1', status: 'Pending' }
-    ];
+    function selectProduct(productName) {
+      document.getElementById('productInput').value = productName;
+    }
 
-    const tableBody = document.getElementById('tableBody');
-    orders.forEach((order, index) => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td class="border px-4 py-2">${order.name}</td>
-        <td class="border px-4 py-2">${order.surname}</td>
-        <td class="border px-4 py-2">${order.phone}</td>
-        <td class="border px-4 py-2">${order.wilaya}</td>
-        <td class="border px-4 py-2">${order.address}</td>
-        <td class="border px-4 py-2">${order.quantity}</td>
-        <td class="border px-4 py-2">${order.product}</td>
-        <td class="border px-4 py-2">
-          <select>
-            <option ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
-            <option ${order.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
-            <option ${order.status === 'Canceled' ? 'selected' : ''}>Canceled</option>
-          </select>
-        </td>
-      `;
-      tableBody.appendChild(row);
-    });
-
-    function exportToExcel() {
-      let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "Name,Surname,Phone,Wilaya,Address,Quantity,Product,Status\n";
-      document.querySelectorAll('#orderTable tbody tr').forEach(row => {
-        const cols = row.querySelectorAll('td');
-        const values = Array.from(cols).map((col, i) => i === 7 ? col.querySelector('select').value : col.textContent);
-        csvContent += values.join(",") + "\n";
-      });
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "orders.csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    function validateProduct() {
+      const product = document.getElementById('productInput').value;
+      if (!product) {
+        alert('يرجى اختيار منتج قبل إرسال الطلب');
+        return false;
+      }
+      return true;
     }
   </script>
 </body>
 </html>
-
